@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HealthController {
 
 	@GetMapping(value = "/health")
-	public ResponseEntity<?> getHealthStatus() {
+	public ResponseEntity<HealthResponse> getHealthStatus() {
 		return ResponseEntity.ok(new HealthResponse(HealthStatus.UP));
 	}
 }
