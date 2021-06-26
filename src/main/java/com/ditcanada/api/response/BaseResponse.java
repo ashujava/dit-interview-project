@@ -25,6 +25,10 @@ public class BaseResponse {
         // No args constructor
     }
 
+    public BaseResponse(boolean success){
+        this.success = success;
+    }
+
     public BaseResponse(boolean success, String error){
         this.success = success;
         this.error = error;
