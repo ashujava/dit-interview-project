@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @ApiModel(description = "Data response object")
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.USE_DEFAULTS)
 public class DataResponse<T> extends BaseResponse{
 
     @ApiModelProperty(required = false, notes = "API response")

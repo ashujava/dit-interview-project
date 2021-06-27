@@ -6,6 +6,7 @@ import com.ditcanada.model.User;
 import com.ditcanada.repository.UserRepository;
 import com.ditcanada.utils.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,8 +16,13 @@ public class UserDaoImpl implements UserDao {
     private UserRepository userRepository;
 
     @Override
-    public boolean isVerifiedUser(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password) != null;
+    public UserEntity findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public UserEntity findByUsernameAndPassword(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password);
     }
 
     @Override

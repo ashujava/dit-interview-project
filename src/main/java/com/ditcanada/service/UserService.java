@@ -8,5 +8,4 @@ public interface UserService {
 
     User addUser(String firstname, String lastname, String username, String password);
 
-
 }
