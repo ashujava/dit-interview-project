@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @ApiModel(description = "Data response object")
-@JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ListResponse<T> extends BaseResponse{
 
     @ApiModelProperty(required = false, notes = "API response")

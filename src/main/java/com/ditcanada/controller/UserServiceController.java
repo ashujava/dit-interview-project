@@ -1,5 +1,6 @@
 package com.ditcanada.controller;
 
+import com.ditcanada.api.request.AddUserRequest;
 import com.ditcanada.api.response.BaseResponse;
 import com.ditcanada.api.response.DataResponse;
 import com.ditcanada.model.User;
@@ -13,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -35,10 +38,34 @@ public class UserServiceController {
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully created user"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying " + "to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to retrieve is not " + "found")})
-    @PostMapping(value = "/v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DataResponse<User>> addUser(@RequestBody User user) {
+    @PostMapping(value = "/v1/create", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BaseResponse> addUser(@RequestBody AddUserRequest request) {
         log.info("Add User");
-        return null;
+        if (null == request.getUsername() || "".equalsIgnoreCase(request.getUsername())) {
+            return new ResponseEntity<>(new BaseResponse(false, "Enter Username"), HttpStatus.BAD_REQUEST);
+        }
+        if (null == request.getLastname() || "".equalsIgnoreCase(request.getLastname())) {
+            return new ResponseEntity<>(new BaseResponse(false, "Enter Lastname"), HttpStatus.BAD_REQUEST);
+        }
+        if (null == request.getPassword() || "".equalsIgnoreCase(request.getPassword())) {
+            return new ResponseEntity<>(new BaseResponse(false, "Enter Password"), HttpStatus.BAD_REQUEST);
+        }
+        try{
+            User user = userService.addUser(request.getFirstname(),
+                    request.getLastname(),
+                    request.getUsername(),
+                    request.getPassword());
+
+            DataResponse<User> response = new DataResponse<>();
+            response.setSuccess(true);
+            response.setData(user);
+            return new ResponseEntity<>(response, HttpStatus.OK );
+        }
+        catch(Exception e){
+            log.error("Exception occurred ",e);
+            return new ResponseEntity<>(new BaseResponse(false, e.getMessage()), HttpStatus.FORBIDDEN);
+
+        }
     }
 
     @ApiOperation(value = "Login User based on username and password", response = DataResponse.class)

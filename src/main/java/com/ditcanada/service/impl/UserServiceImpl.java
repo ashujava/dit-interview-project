@@ -1,6 +1,7 @@
 package com.ditcanada.service.impl;
 
 import com.ditcanada.dao.UserDao;
+import com.ditcanada.model.User;
 import com.ditcanada.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,5 +15,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isVerifiedUser(String username, String password) {
         return userDao.isVerifiedUser(username,password);
+    }
+
+    @Override
+    public User addUser(String firstname, String lastname, String username, String password) {
+        return userDao.addUser(firstname, lastname, username, password);
     }
 }
