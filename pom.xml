@@ -8,10 +8,10 @@
         <version>2.3.8.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.ditcanada</groupId>
-    <artifactId>dit-service</artifactId>
+    <groupId>com.express</groupId>
+    <artifactId>express-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>dit-service</name>
+    <name>express-service</name>
     <description>A Project on web, jpa, jwt, mysql</description>
 
     <properties>
